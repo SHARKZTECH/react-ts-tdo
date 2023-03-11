@@ -3,21 +3,23 @@ import {MdCheck, MdDelete, MdEdit} from "react-icons/md"
 import { Todo } from './Todo';
 
 type Props={
-    todo:Todo
+   todo:Todo,
+   todos:Array<Todo>,
+   setTodos:React.Dispatch<React.SetStateAction<Todo[]>>
 }
 
-const TodoItem:React.FC<Props> = ({todo}) => {
+const TodoItem:React.FC<Props> = ({todo,todos,setTodos}) => {
     const [edit,setEdit]=useState<boolean>(false);
     const [text,setText]=useState<string>(todo.todo);
 
     const handleEdit=(id:number)=>{
         setEdit(!edit);
         if(edit){
-            alert(text);
+            setTodos([...todos.filter(t=>t.id !== id),{id,todo:text,isDone:todo.isDone}]);
         }
     }
     const handleDelete=(id:number)=>{
-        alert(id)
+        setTodos(todos.filter(t=>t.id !== id));
     }
     const handleComplte=(id:number)=>{
         alert(id);

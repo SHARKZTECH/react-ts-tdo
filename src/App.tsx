@@ -26,7 +26,7 @@ const App: React.FC=()=> {
       <span className='heading'>Teskify</span>
       <div>
         <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} setTodos={setTodos}/>
       </div>
     </div>
   )
