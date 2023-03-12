@@ -15,7 +15,7 @@ const TodoItem:React.FC<Props> = ({todo,todos,setTodos}) => {
     const handleEdit=(id:number)=>{
         setEdit(!edit);
         if(edit){
-            setTodos([...todos.filter(t=>t.id !== id),{id,todo:text,isDone:todo.isDone}]);
+            setTodos(todos.map(t=> t.id === id ? {...t,todo:text} : t));
         }
     }
     const handleDelete=(id:number)=>{
