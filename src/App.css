@@ -51,6 +51,10 @@
     width: 60%;
     margin-left: 20%;
 }
+.comp{
+    text-decoration: line-through;
+    opacity: .5;
+}
 .todo_item_container p{
     font-size: x-large;
 }

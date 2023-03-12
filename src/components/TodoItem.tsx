@@ -22,10 +22,10 @@ const TodoItem:React.FC<Props> = ({todo,todos,setTodos}) => {
         setTodos(todos.filter(t=>t.id !== id));
     }
     const handleComplte=(id:number)=>{
-        alert(id);
+        setTodos(todos.map(t=> t.id === id ? {...t,isDone:!t.isDone} : t));
     }
   return (
-    <div className='todo_item_container'>
+    <div className={todo.isDone ? 'todo_item_container comp' : 'todo_item_container'}>
     {edit? (
         <input value={text} onChange={(e)=>setText(e.target.value)} />
     ):(
