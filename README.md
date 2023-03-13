@@ -1,20 +1,20 @@
 // Online Java Compiler
 // Use this editor to write, compile and run your Java code online
-
 import java.io.*;
 import java.net.*;
+import java.util.*;
 class Client {
     public static void main(String[] args) {
         Socket s=null;
         InputStreamReader in=null;
-        OutputStreamReader out=null;
+        OutputStreamWriter out=null;
         BufferedReader br=null;
         BufferedWriter bw=null;
         
         try{
             s=new Socket("localhost",1234);
             in=new InputStreamReader(s.getInputStream());
-            out=new OutputStreamReader(s.getOutputStream());
+            out=new OutputStreamWriter(s.getOutputStream());
             
             br=new BufferedReader(in);
             bw=new BufferedWriter(out);
@@ -26,7 +26,7 @@ class Client {
                 bw.newLine();
                 bw.flush();
                 System.out.println("Server :"+br.readLine());
-                if(msg.equalsIgnoreCase("BYE"));
+                if(msg.equalsIgnoreCase("BYE"))
                  break;
             }
         }catch(IOException e){
@@ -54,28 +54,33 @@ class Server {
     public static void main(String[] args) {
         Socket s=null;
         InputStreamReader in=null;
-        OutputStreamReader out=null;
+        OutputStreamWriter out=null;
         BufferedReader br=null;
         BufferedWriter bw=null;
         ServerSocket ss=null;
         
+        try{
         ss=new ServerSocket(1234);
+        }catch(IOException e){
+          e.printStackTrace();
+        }
+        
         while(true){
             try{
                 s=ss.accept();
-                in=new InputSreamReader(s.getInputStream());
-                out=new OutputStreamReader(s.getOutpuStream());
+                in=new InputStreamReader(s.getInputStream());
+                out=new OutputStreamWriter(s.getOutputStream());
                 
                 br=new BufferedReader(in);
-                bw=new BufferWriter(out);
+                bw=new BufferedWriter(out);
                 
                 while(true){
                     String msg=br.readLine();
                     System.out.println("Client :"+msg);
-                    bw.write(str:"MSG Received");
+                    bw.write("MSG Received");
                     bw.newLine();
                     bw.flush();
-                    if(msg.equalsIgnoreCase(another string:"BYE"))
+                    if(msg.equalsIgnoreCase("BYE"))
                     break;
                 }
             s.close();
