@@ -7,6 +7,7 @@ import { Todo } from './components/Todo';
 
 
 
+
 const App: React.FC=()=> {
   const [todo,setTodo]=useState<string>('');
   const [todos,setTodos]=useState<Array<Todo>>([]);
