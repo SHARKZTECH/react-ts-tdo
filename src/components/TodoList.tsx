@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable,DropResult } from 'react-beautiful-dnd';
 import { Todo } from './Todo';
 import TodoItem from './TodoItem';
 
@@ -10,25 +10,14 @@ type Props={
 
 const TodoList:React.FC<Props> = ({todos,setTodos}) => {
 
-  const ondragend=(result)=>{
-    console.log(result);
 
-    if (!result.destination) return;
-
-    const items = Array.from(todos);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    // setTodos(items);
-
-  }
   return (
     <div>
-      <DragDropContext onDragEnd={ondragend}>
-        <Droppable droppableId={todos.toString()}>
+        <Droppable droppableId={todos?.toString()}>
           {(provided=>(
-             <p {...provided.droppableProps} ref={provided.innerRef}>
-            {todos.map(todo=>(
-                <Draggable draggableId={todo.id.toString()} index={todo.id}>
+             <div {...provided.droppableProps} ref={provided.innerRef}>
+            {todos.map((todo,idx)=>(
+                <Draggable draggableId={todo?.id.toString()} index={idx} key={idx}>
                   {provided=>(
                     <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                        <TodoItem todo={todo} todos={todos} setTodos={setTodos} />      
@@ -37,10 +26,9 @@ const TodoList:React.FC<Props> = ({todos,setTodos}) => {
                 </Draggable>
             ))}
             {provided.placeholder}
-            </p>
+            </div>
           ))}
         </Droppable>
-      </DragDropContext>
     </div>
   )
 }
