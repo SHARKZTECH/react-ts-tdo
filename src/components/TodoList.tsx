@@ -15,44 +15,39 @@ const TodoList:React.FC<Props> = ({todos,setTodos,CompletedTodos,setCompletedTod
 
   return (
     <div className='todolist_container'>
+
         <Droppable droppableId="TodoList">
           {(provided=>(
              <div 
              className='active'
              {...provided.droppableProps} ref={provided.innerRef}>
               <span className='heading'>Active Task</span>
+
             {todos.map((todo,idx)=>(
-                <Draggable draggableId={todo?.id.toString()} index={idx} key={idx}>
-                  {provided=>(
-                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                       <TodoItem todo={todo} todos={todos} setTodos={setTodos} />      
-                    </div>
-                  )}
-                </Draggable>
+              <TodoItem todo={todo} todos={todos} setTodos={setTodos} idx={idx}/>                    
             ))}
+
             {provided.placeholder}
             </div>
           ))}
         </Droppable>
+
         <Droppable droppableId="CompletedTodos">
           {(provided=>(
              <div 
              className='complete'
              {...provided.droppableProps} ref={provided.innerRef}>
             <span className='heading'>Completed Task</span>
+
             {CompletedTodos.map((todo,idx)=>(
-                <Draggable draggableId={todo?.id.toString()} index={idx} key={idx}>
-                  {provided=>(
-                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                       <TodoItem todo={todo} todos={todos} setTodos={setTodos} />      
-                    </div>
-                  )}
-                </Draggable>
+              <TodoItem todo={todo} todos={todos} setTodos={setCompletedTodos} idx={idx}/>                    
             ))}
+            
             {provided.placeholder}
             </div>
           ))}
         </Droppable>
+
     </div>
   )
 }
