@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {MdCheck, MdDelete, MdEdit} from "react-icons/md"
 import { Todo } from './Todo';
 
@@ -10,7 +10,9 @@ type Props={
 
 const TodoItem:React.FC<Props> = ({todo,todos,setTodos}) => {
     const [edit,setEdit]=useState<boolean>(false);
-    const [text,setText]=useState<string>(todo.todo);
+    const [text,setText]=useState<string>("");
+
+    useEffect(()=>{setText(todo.todo)},[todo])
 
     const handleEdit=(id:number)=>{
         setEdit(!edit);
